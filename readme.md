@@ -21,3 +21,11 @@
             git log
         9、恢复到指定的版本
             git reset --hard 版本号
+        10、生成ssh密匙 暂存区==>远程仓库
+            ssh-keygen -t rsa -C "996508140@qq.com";
+
+        密匙目录：C:\Users\zhoujian\.ssh\id_rsa.pub
+
+        11、github账户配置密匙
+
+        12、暂存区==>远程仓库
