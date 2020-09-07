@@ -35,3 +35,5 @@
             git clone https://github.com/StarrySkyZJ/TestCode.git
         14、从远程仓库同步本地代码
             git pull
+        15、清空暂存区
+            rm .git/index
