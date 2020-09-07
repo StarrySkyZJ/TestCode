@@ -15,3 +15,9 @@
             git status
         6、从暂存区恢复文件到工作区
             git checkout 文件名
+        7、查看工作区和暂存区版本的区别
+            git diff
+        8、查看已经提交到暂存区的历史版本
+            git log
+        9、恢复到指定的版本
+            git reset --hard 版本号
