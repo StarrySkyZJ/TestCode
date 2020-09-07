@@ -29,3 +29,9 @@
         11、github账户配置密匙
 
         12、暂存区==>远程仓库
+            git remote add origin https://github.com/StarrySkyZJ/TestCode.git
+            git push -u origin master
+        13、从远程仓库克隆项目到本地
+            git clone https://github.com/StarrySkyZJ/TestCode.git
+        14、从远程仓库同步本地代码
+            git pull
