@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单注册</title>
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            //用户名文本框绑定事件
+            var unametextElt = document.getElementById("unametext");    //文本框元素
+            var ueElt = document.getElementById("unameError");  //提示元素
+            var unameFlag = false;  //合法标记
+            //绑定onblur
+            unametextElt.onblur = function() {
+                var uname = unametextElt.value;
+                uname = uname.trim();   //去除前后空白
+                var unameRegExp = /^[A-Za-z0-9]{6,14}$/;
+                var ok = unameRegExp.test(uname);
+                if(ok) {
+                   unameFlag = true;
+                   ueElt.style="color: green; font-size: 12px;";
+                   ueElt.innerText = "用户名合法";
+                }else {
+                    ueElt.style="color: red; font-size: 12px;";
+                    ueElt.innerText = "用户名不合法! 由数字或字母组成6~14位";
+                }
+            }
+            //绑定onfocus
+            unametextElt.onfocus = function() {
+                ueElt.innerText = "";
+            }
+
+            //密码框绑定onblur
+            var pswtextElt = document.getElementById("pswtext");
+            var pswFlag = false;
+            document.getElementById("pswtext").onblur = function() {
+                var psw = document.getElementById("pswtext").value;
+                var pswRegExp = /^[A-Za-z0-9]{6,14}$/;
+                var ok = pswRegExp.test(psw);
+                if(ok) {
+                   pswFlag = true;
+                   var pe = document.getElementById("pswError");
+                   pe.style="color: green; font-size: 12px;";
+                   pe.innerText = "密码合法";
+                }else {
+                    var pe = document.getElementById("pswError");
+                    pe.style="color: red; font-size: 12px;";
+                    pe.innerText = "密码不合法! 由数字或字母组成6~14位";
+                }
+            }
+            //密码框绑定onfocus
+            document.getElementById("pswtext").onfocus = function() {
+                document.getElementById("pswError").innerText = "";
+            }
+
+            //确认密码框绑定onblur
+            var psw1textElt = document.getElementById("pswtext1");
+            var psw1Flag = false;
+            document.getElementById("pswtext1").onblur = function () {
+                var psw  = document.getElementById("pswtext").value;
+                var psw1 = document.getElementById("pswtext1").value;
+                if(psw1===psw && psw1!="") {
+                    psw1Flag = true;
+                    var p1e = document.getElementById("psw1Error");
+                    p1e.style="color: green; font-size: 12px;";
+                    p1e.innerText = "确认密码正确";
+                }else {
+                    var p1e = document.getElementById("psw1Error");
+                    p1e.style="color: red; font-size: 12px;";
+                    p1e.innerText = "两次输入密码不一致";
+                }
+            }
+
+            //邮箱框绑定onblur
+            var emailtextElt = document.getElementById("emailtext");
+            var emailFlag = false;
+            document.getElementById("emailtext").onblur = function() {
+                var email = document.getElementById("emailtext").value;
+                var emailRegEpx = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+                var ok = emailRegEpx.test(email);
+                if(ok) {
+                    emailFlag = true;
+                    var ee = document.getElementById("emailError");
+                    ee.style="color: green; font-size: 12px;";
+                    ee.innerText = "邮箱格式合法";
+                }else{
+                    var ee = document.getElementById("emailError");
+                    ee.style="color: red; font-size: 12px;";
+                    ee.innerText = "邮箱格式不合法，请重新输入！";
+                }
+            }
+            //邮箱框绑定onfocus
+            document.getElementById("emailtext").onfocus = function() {
+                document.getElementById("emailError").innerText = "";
+            }
+
+            //提交按钮绑定onclick
+            var subElt = document.getElementById("sub");
+            subElt.onclick = function() {
+                if(unameFlag && pswFlag && psw1Flag && emailFlag) {
+                    var ufElt = document.getElementById("userForm");
+                    ufElt.submit();
+                }
+            }
+        }
+
+
+        
+    </script>
+
+   <form action="http://localhost:8080/jd/register" method="get" id="userForm">
+        <table>
+            <tr>
+                <td align="right">
+                    <span style="color:black; font-size: 12px;">用户名：</span> <br><br>
+                </td>
+                <td>
+                    <input type="text" name="username" id="unametext" /> <br><br>
+                </td>
+                <td>
+                    <span id="unameError" style="color: red; font-size: 12px;"></span> <br><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="right">
+                    <span style="color:black; font-size: 12px;">密码：</span> <br><br>
+                </td>
+                <td>
+                    <input type="text" name="password" id="pswtext" /> <br><br>
+                </td>
+                <td>
+                    <span id="pswError" style="color: red; font-size: 12px;"></span> <br><br>
+                </td>
+            </tr>
+            
+            <tr>
+                 <td align="right">
+                    <span style="color:black; font-size: 12px;">确认密码：</span> <br><br>
+                 </td>
+                 <td>
+                    <input type="text" id="pswtext1" /> <br><br>
+                 </td>
+                 <td>
+                    <span id="psw1Error" style="color: red; font-size: 12px;"></span> <br><br>
+                 </td>
+            </tr>
+
+            <tr>
+                <td align="right">
+                    <span style="color:black; font-size: 12px;">邮箱：</span> <br><br>
+                </td>
+                <td>
+                    <input type="text" name="email" id="emailtext" /> <br><br>
+                </td>
+                <td>
+                    <span id="emailError" style="color: red; font-size: 12px;"></span> <br><br>
+                </td>
+            </tr>
+                
+            <tr>
+                <td colspan="2" align="center"> 
+                    <input type="button" value="提交" id="sub">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="reset" value="重置" id="res">
+                </td>
+            </tr>
+
+        </table>
+
+        <!------ 非表格表单
+        <span style="color:black; font-size: 12px;">&nbsp;用 户 名：&nbsp;</span>
+        <input type="text" name="username" id="unametext" />
+        <span id="unameError" style="color: red; font-size: 12px;"></span> <br><br>
+     
+        <span style="color:black; font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密 码：&nbsp;</span>
+        <input type="text" name="password" id="pswtext" />
+        <span id="pswError" style="color: red; font-size: 12px;"></span>  <br><br>
+     
+        <span style="color:black; font-size: 12px;">确认密码：</span>
+        <input type="text" id="pswtext1" />
+        <span id="psw1Error" style="color: red; font-size: 12px;"></span>  <br><br>
+     
+        <span style="color:black; font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮 箱：&nbsp;</span>
+        <input type="text" name="email" id="email" />
+        <span id="emailError" style="color: red; font-size: 12px;"></span>  <br><br>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" value="提交" id="sub"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="reset" value="重置" id="res">
+        ---->
+   </form>
+
+</body>
+</html>
